@@ -11,7 +11,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 void ShowFileBrowseDialog(HWND hwnd);
 
 wchar_t g_szFilePath[MAX_PATH] = L"";
-WCHAR g_szProcessName[MAX_PATH] = L"Minecraft.Windows.exe"; // Default process text
+WCHAR g_szProcessName[MAX_PATH] = L"Minecraft.Windows.exe";
 HWND g_hStatusText = nullptr;
 HWND g_hPlayingText = nullptr;
 
@@ -109,12 +109,10 @@ void ShowFileBrowseDialog(HWND hwnd)
     {
         SetWindowTextW(GetDlgItem(hwnd, 3), g_szFilePath);
 
-        // Extract the DLL filename from the file path
         WCHAR* dllFileName = wcsrchr(g_szFilePath, L'\\');
         if (dllFileName)
         {
-            dllFileName++; // Move past the backslash
-            // Display the selected DLL filename on the playing text
+            dllFileName++;
             WCHAR playingText[MAX_PATH + 10] = L"Playing: ";
             wcscat_s(playingText, dllFileName);
             SetWindowTextW(g_hPlayingText, playingText);
@@ -147,7 +145,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
         HWND hProcessNameInput = CreateWindowW(
             L"EDIT",
-            g_szProcessName, // Set the default process text
+            g_szProcessName,
             WS_VISIBLE | WS_CHILD | WS_BORDER | ES_AUTOHSCROLL,
             120, 10, 205, 30,
             hwnd,
@@ -182,7 +180,7 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
             L"STATIC",
             L"",
             WS_CHILD | WS_VISIBLE | SS_LEFT,
-            10, 90, 320, 30, // Position the playing text below the status text
+            10, 90, 320, 30, 
             hwnd,
             nullptr,
             (HINSTANCE)GetWindowLongPtr(hwnd, GWLP_HINSTANCE),
@@ -191,7 +189,6 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
 
         SetWindowTextW(g_hPlayingText, L"No DLL selected!");
 
-        // Add a gray background to the playing text
         HBRUSH grayBrush = CreateSolidBrush(RGB(240, 240, 240));
         SetClassLongPtr(g_hPlayingText, GCLP_HBRBACKGROUND, (LONG_PTR)grayBrush);
 
@@ -234,10 +231,9 @@ LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
         {
             ShowFileBrowseDialog(hwnd);
 
-            // Display the selected DLL filename on the playing text
             WCHAR playingText[MAX_PATH + 10] = L"Playing: ";
             wcscat_s(playingText, g_szFilePath);
-            SetWindowTextW(g_hPlayingText, playingText); // Update the playing text
+            SetWindowTextW(g_hPlayingText, playingText);
         }
         break;
     }
