@@ -1,4 +1,10 @@
-# Minecraft DLL Injector
+# Chyjector.
+
+a simple, easy to use, dll injector based off.
+
+- thank you fligger for the injector code i useto actually inject the dll.
+- the ui itself and the discord rpc were made by me :D
+- feel free to fork and make a pull request <3
 
 ## Build Instructions
 
