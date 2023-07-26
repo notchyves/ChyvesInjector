@@ -1,4 +1,4 @@
-# Chyjector.
+# Chyves Injector.
 
 a simple, easy to use, dll injector based off.
 
